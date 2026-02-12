@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>En viktig fråga ❤️</title>
+
+<style>
+body {
+    margin:0;
+    overflow:hidden;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#fad0c4,#ffdde1);
+    background-size:400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container {
+    position:relative;
+    z-index:2;
+    margin-top:120px;
+}
+
+h1 {
+    font-size:38px;
+}
+
+/* Knappar */
+button {
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+/* JA-knapp (större) */
+#yesBtn {
+    background:#ff4d6d;
+    color:white;
+    font-size:32px;
+    padding:20px 50px;
+    margin:15px;
+}
+
+/* NEJ-knapp (lite större) */
+#noBtn {
+    background:#333;
+    color:white;
+    font-size:24px;
+    padding:15px 35px;
+    position:absolute;
+}
+
+/* Falling hearts */
+.heart {
+    position:fixed;
+    top:-10px;
+    color:red;
+    font-size:20px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1 id="text">Jag har en viktig fråga... ❤️</h1>
+
+<button id="yesBtn">JA ❤️</button>
+<button id="noBtn">NEJ 😅</button>
+</div>
+
+<script>
+const text = document.getElementById("text");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+let noCount = 0;
+
+/* Starta fråga efter lite dramatik */
+setTimeout(()=>{
+    text.innerHTML = "Vill du vara min Valentine? ❤️";
+},1500);
+
+/* JA-knapp */
+yesBtn.onclick = function() {
+    document.body.innerHTML =
+    "<h1 style='margin-top:150px'>JAAA, älskar dig honeybun ❤️❤️❤️</h1>";
+};
+
+/* NEJ-knapp logik */
+function noBtnClicked() {
+    noCount++;
+    if(noCount === 1) {
+        text.innerHTML =
+        "Inte ens om jag köper hotellrum med havsutsikt på Falkenberg Strandbad? 🌊🏨🥺";
+    }
+    else if(noCount === 2) {
+        text.innerHTML =
+        "Om jag bjuder dig på en resa till Dubai då? ✈️🌴😎";
+    }
+    else {
+        document.body.innerHTML =
+        "<h1 style='margin-top:150px'>Du blir min Valentine ändå 😈❤️ Du har inget val!</h1>";
+    }
+}
+
+noBtn.onclick = noBtnClicked;
+
+/* Flytta NEJ-knappen var 2 sekunder */
+function moveNoButton() {
+    let x = Math.random() * (window.innerWidth - 150);
+    let y = Math.random() * (window.innerHeight - 80);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+setInterval(moveNoButton, 2000);
+
+/* Falling hearts generator */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (15 + Math.random()*25) + "px";
+    heart.style.animationDuration = (3 + Math.random()*3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(()=> heart.remove(),6000);
+}
+setInterval(createHeart,200);
+</script>
+
+</body>
+</html>
