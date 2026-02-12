@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>En viktig fråga ❤️</title>
+
+<style>
+
+body {
+    margin:0;
+    overflow:hidden;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#fad0c4,#ffdde1);
+    background-size:400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container {
+    position:relative;
+    z-index:2;
+    margin-top:120px;
+}
+
+h1 {
+    font-size:38px;
+}
+
+button {
+    font-size:22px;
+    padding:12px 25px;
+    margin:15px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+#yesBtn {
+    background:#ff4d6d;
+    color:white;
+}
+
+#noBtn {
+    background:#333;
+    color:white;
+    position:absolute;
+}
+
+/* Falling hearts */
+
+.heart {
+    position:fixed;
+    top:-10px;
+    color:red;
+    font-size:20px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Careless Whisper -->
+<iframe id="music" width="0" height="0"
+src="https://www.youtube.com/embed/izGwDsrQ1eQ?autoplay=1&loop=1&playlist=izGwDsrQ1eQ&mute=0"
+allow="autoplay">
+</iframe>
+
+<div class="container">
+
+<h1 id="text">Jag har en viktig fråga... ❤️</h1>
+
+<button id="yesBtn">JA ❤️</button>
+<button id="noBtn">NEJ 😅</button>
+
+</div>
+
+<script>
+
+const text = document.getElementById("text");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+let noCount = 0;
+
+/* Starta fråga */
+setTimeout(()=>{
+    text.innerHTML = "Vill du vara min Valentine? ❤️";
+},1500);
+
+
+/* JA-knapp */
+yesBtn.onclick = function() {
+    document.body.innerHTML =
+    "<h1 style='margin-top:150px'>JAAA, älskar dig honeybun ❤️❤️❤️</h1>";
+};
+
+
+/* NEJ-knapp logik */
+noBtn.onclick = function() {
+
+    noCount++;
+
+    if(noCount === 1) {
+        text.innerHTML =
+        "Inte ens om jag köper hotellrum med havsutsikt på Falkenberg Strandbad? 🌊🏨🥺";
+    }
+    else if(noCount === 2) {
+        text.innerHTML =
+        "Om jag bjuder dig på en resa till Dubai då? ✈️🌴😎";
+    }
+    else {
+        document.body.innerHTML =
+        "<h1 style='margin-top:150px'>Du blir min Valentine ändå 😈❤️ Du har inget val!</h1>";
+    }
+};
+
+
+/* Flytta NEJ-knappen var 0.5 sekund */
+
+function moveNoButton() {
+
+    let x = Math.random() * (window.innerWidth - 150);
+    let y = Math.random() * (window.innerHeight - 80);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+setInterval(moveNoButton, 1000);
+
+
+/* Falling hearts generator */
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (15 + Math.random()*25) + "px";
+    heart.style.animationDuration = (3 + Math.random()*3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=> heart.remove(),6000);
+}
+
+setInterval(createHeart,200);
+
+
+/* Mobil autoplay hack (för att musik ska starta direkt) */
+document.body.addEventListener("click", ()=>{
+    document.getElementById("music").src += "";
+});
+
+</script>
+
+</body>
+</html>
